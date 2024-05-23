@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input ,option,select{
+  color:black;
+}
+
+.password input{
+  border: none;
+  outline: none;
+}
+
+.password{
+  display: flex;
+  border:1px solid black;
+  justify-content: space-between;
+  padding:0px 5px;
+}
+
+label{
+  color: black;
+}
