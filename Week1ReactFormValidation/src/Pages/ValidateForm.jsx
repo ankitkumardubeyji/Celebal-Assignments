@@ -79,7 +79,7 @@ const [city,setCities] = useState(City.getCitiesOfCountry('IN'))
     
     const navigate = useNavigate()
 
-    function createNewAccount(e){
+    function validateAccount(e){
        
         e.preventDefault()
     
@@ -151,7 +151,7 @@ const [city,setCities] = useState(City.getCitiesOfCountry('IN'))
       
         <div className="flex items-center justify-center h-[100vh] m-auto">
         <form
-          onSubmit={createNewAccount}
+          onSubmit={validateAccount}
           className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_black]"
         >
           
@@ -327,7 +327,7 @@ const [city,setCities] = useState(City.getCitiesOfCountry('IN'))
             className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer"
             type="submit"
           >
-            Create Account
+            Validate Data
           </button>
 
           
