@@ -14,8 +14,7 @@ const [city,setCities] = useState(City.getCitiesOfCountry('IN'))
   setCountry(Country.getAllCountries())
  
 
-  //console.log(State.getStatesOfCountry("IN"));
-  /*
+  /* 
   fetch('https://restcountries.com/v3.1/all').then(res=>{
     console.log("edhar");
     return res.json()
@@ -127,7 +126,7 @@ const [city,setCities] = useState(City.getCitiesOfCountry('IN'))
     const [visibility,setVisibility] = useState(false)
     function handleVisibility(e){
       e.preventDefault()
-      console.log("dj bravo");
+     
       if(visibility==false){
         setVisibility(true)
         e.target.type="text";
@@ -136,7 +135,7 @@ const [city,setCities] = useState(City.getCitiesOfCountry('IN'))
         setVisibility(false)
         e.target.type = "password"
       }
-      console.log(e.target.parentElement.input)
+      
       
     }
 

@@ -1,7 +1,7 @@
 
 import './App.css'
-import DisplayData from './Components/DisplayData'
-import ValidateForm from './Components/FormInput/ValidateForm'
+import DisplayData from './Pages/DisplayData'
+import ValidateForm from './Pages/ValidateForm'
 import { Route,createBrowserRouter,createRoutesFromElements,RouterProvider,Navigate } from 'react-router-dom'
 
 
