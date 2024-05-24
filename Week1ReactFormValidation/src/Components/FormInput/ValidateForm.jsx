@@ -36,8 +36,8 @@ const [city,setCities] = useState(City.getCitiesOfCountry('IN'))
         email:"",
         password:"",
         phoneno:"",
-        country:"",
-        city:"",
+        country:"IN",
+        city:"ABHANERI",
         pan:"",
         aadhar:"",
       
