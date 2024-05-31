@@ -29,10 +29,12 @@ function App() {
 const [filteredTodos,setFilteredTodos] = useState([])
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setFilteredTodos(filteredTodos.filter((item)=>item.datetime == formatDate(date)))
+    setFilteredTodos(todos.filter((item)=>item.datetime == formatDate(date)))
+    setSorted(false)
     
 };
 
+const[sorted,setSorted] = useState(false)
 
 const [selectedDate, setSelectedDate] = useState(null);
 
@@ -68,6 +70,22 @@ const [selectedDate, setSelectedDate] = useState(null);
         // and setTodos will update the prevTodos
   }
 
+  const [sortedTodos,setSortedTodos] = useState([])
+
+  function sortTodo(){
+    setSortedTodos(sortedTodos.slice().sort((a, b) => {
+      // Convert the datetime strings to Date objects for comparison
+      const dateA = new Date(a.datetime);
+      const dateB = new Date(b.datetime);
+    
+      // Compare the date objects
+      return dateA - dateB;
+    }));
+    setSorted(true)
+  }
+
+  
+
   // untill we are not talking about the server side rendering we can directly access localStorage as localStorage is present in browser
   // we are using useEffect as at first time itself the application loaded. below functionality should be functional.
   useEffect(() => {
@@ -76,6 +94,7 @@ const [selectedDate, setSelectedDate] = useState(null);
     if (todos && todos.length > 0) { // json here is the array of objects
       setTodos(todos)
       setFilteredTodos(todos)
+      setSortedTodos(todos)
     }
   }, []) // if i gives todos here as the dependencie then the infite loop will be created.
 
@@ -92,10 +111,10 @@ const [selectedDate, setSelectedDate] = useState(null);
       <div className="bg-[#172842] min-h-screen py-8">
         <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
           <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos</h1>
-          <div className="mb-4">
+          <div className="mb-4" style={{display:"flex",flexDirection:"column",gap:"10px"}}>
             {/* Todo form goes here */} 
             <TodoForm />
-            <div style={{ display: "flex", gap: "50px", width: "100%" }}>
+            <div style={{ display: "flex", gap: "50px", width: "100%", alignItems:"center" ,justifyContent:'space-between'}}>
               <p>Filter By Date: </p>
               <DatePicker
                 selected={selectedDate}
@@ -103,13 +122,28 @@ const [selectedDate, setSelectedDate] = useState(null);
                 dateFormat="dd-MMM-yyyy"
                 placeholderText="Filter By Date"
                 className="form-control" // Ensure correct class for styling
-                customInput={<input style={{ color: 'black' }} />}
+                customInput={<input style={{ color: 'black' ,padding:"5px 15px"}} />}
               />
+
+{!sorted ?(<button onClick = {sortTodo}type="submit" className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
+                        Sort By Deadline 
+                    </button>)
+
+:(  <button type="submit" onClick={()=>setSorted(false)} className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
+  Sort By Latest
+</button>)
+}
+
+
             </div>
           </div>
           <div className="flex flex-wrap gap-y-3">
             {/* Loop and Add TodoItem here */}
-            {selectedDate 
+            {sorted?sortedTodos.map((todo) => (
+                  <div key={todo.id} className='w-full'>
+                    <TodoItem todo={todo} />
+                  </div>
+                )): selectedDate 
               ? filteredTodos.map((todo) => (
                   <div key={todo.id} className='w-full'>
                     <TodoItem todo={todo} />

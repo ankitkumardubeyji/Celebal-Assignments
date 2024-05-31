@@ -34,7 +34,7 @@ function TodoForm() {
         addTodo({
             TodoMessage,
             completed: false,
-            datetime: selectedDate ? selectedDate.toISOString() : getFormattedDate()
+            datetime: selectedDate ? selectedDate.toISOString() : formatDate(new Date())
         });
         setTodoMessage("");
         setSelectedDate(null);
